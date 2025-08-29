@@ -1,12 +1,12 @@
 Local,Remote,Other
-1a - Ping machine in domain,,quit - Exits script 
+1a - Ping machine in domain,,quit - Exits script,1b(UF) - Retrieve machines in network and ping and save list
 2a - Password reset,,? - Displays commands 
 3a - GP Update Pods,,?? - Definitions
 4a - Restart Pods 
 5a - Set expiration date for all users in specific OU 
 6a - Get rid of expiration date for specific users
 7a - Set email address for all users
-100a(CCDC)(UF) - Enable PS Remoting on all machines across domain via GP (WinRM)
+100a(CCDC)(UF) - Enable PS Remoting on all machines across domain via GP (WinRM),100b(CCDC)(UF) - Install chocolatey
 101a(CCDC) - Get inventory for all machines across domain
 102a(CCDC) - Shuffle AD creds
 103a(CCDC) - Turn SMBv1 Off
