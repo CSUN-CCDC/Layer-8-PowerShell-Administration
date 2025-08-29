@@ -8,5 +8,5 @@ Local,Remote,Other
 7a - Set email address for all users
 100a(CCDC)(UF) - Enable PS Remoting on all machines across domain via GP (WinRM)
 101a(CCDC) - Get inventory for all machines across domain
-102a(CCDC)(UF) - Shuffle AD creds
+102a(CCDC) - Shuffle AD creds
 103a(CCDC) - Turn SMBv1 Off
