@@ -9,6 +9,3 @@ if($test -eq $false){
 } else {
     Write-Host "Failure"
 }
-
-#Returns output and closes script
-Read-Host "Press enter to exit"

@@ -9,3 +9,4 @@ Local,Remote,Other
 100a(CCDC)(UF) - Enable PS Remoting on all machines across domain via GP (WinRM)
 101a(CCDC) - Get inventory for all machines across domain
 102a(CCDC)(UF) - Shuffle AD creds
+103a(CCDC) - Turn SMBv1 Off

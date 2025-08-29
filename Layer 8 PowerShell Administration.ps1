@@ -48,7 +48,7 @@ Write-Host -ForegroundColor Red @"
 
 	NOTES ABOUT SCRIPT:
 		-3 and 4 use static names
-
+		- Global credential not working as intended (will figure out later)
 #>
 
 try {
@@ -110,12 +110,9 @@ while ($start -eq $true) {
 
 		}
 		
-	
-	
 		<#
 		Below are CCDC Scripts
 	#>
-		
 		
 		100a {
 		
@@ -130,7 +127,6 @@ while ($start -eq $true) {
 	
 		}
 
-
 		102a {
 			
 			powershell -file .\Passphrases\psswrdshfl.ps1
@@ -138,7 +134,11 @@ while ($start -eq $true) {
 
 		}
 		
-		
+		103a {
+
+			powershell -file .\Scripts\SMBv1Off.ps1
+			break
+		}
 
 		#HELP
 		? {
