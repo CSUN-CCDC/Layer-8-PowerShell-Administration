@@ -47,12 +47,12 @@ Write-Host -ForegroundColor Red @"
 <#
 
 	NOTES ABOUT SCRIPT:
-		-3 and 4 use static names
-		- Global credential not working as intended (will figure out later)
+		- 3 and 4 use static names
+		
 #>
 
 try {
-$Global:credential = Get-Credential
+$credential = Get-Credential
 }
 catch {
 Write-Host -ForegroundColor Yellow "No initial credential provided. This is fine."
@@ -64,6 +64,7 @@ while ($start -eq $true) {
 	switch ($num) {
 		1a {
 		
+			#Import-File, Import-Module
 			powershell -file ".\Scripts\1a.ps1"
 			break
 		}
@@ -160,7 +161,7 @@ while ($start -eq $true) {
 	
 		quit {
 			
-			$Global:credential = $null
+			$credential = Clear-Variable
 			$start = $false
 			break
 

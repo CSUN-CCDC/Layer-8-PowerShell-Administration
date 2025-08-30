@@ -17,5 +17,5 @@ Write-Host -ForegroundColor Yellow "How powershell reads dates:'6/9/2069'"
 [string]$day = Read-Host "Enter day(ADD '/' @ END)"
 [string]$date = $month + $day + $year
 foreach ($user in $users) {
-				Set-ADAccountExpiration -Credential $Global:credential -Identity $user -DateTime $date
+				Set-ADAccountExpiration -Credential $credential -Identity $user -DateTime $date
 }

@@ -23,14 +23,14 @@ $choose = Read-Host
 $result = $users[$choose - 1]
 $if = Read-Host "Change password on next logon? (Y/N)"
 if ($if -eq "Y") {
-				Set-ADUser -Credential $Global:credential -Identity $result -ChangePasswordAtLogon $true
-				Set-ADAccountPassword -Credential $Global:credential -Identity $result -Reset
+				Set-ADUser -Credential $credential -Identity $result -ChangePasswordAtLogon $true
+				Set-ADAccountPassword -Credential $credential -Identity $result -Reset
 }
 ElseIf ($if -eq "N") {
-				Set-ADUser -Credential $Global:credential -Identity $result -ChangePasswordAtLogon $false
-				Set-ADAccountPassword -Credential $Global:credential -Identity $result -Reset
+				Set-ADUser -Credential $credential -Identity $result -ChangePasswordAtLogon $false
+				Set-ADAccountPassword -Credential $credential -Identity $result -Reset
 }
 Else {
 				Write-Host -ForegroundColor Red "Incorrect value proceeding to password reset"
-				Set-ADAccountPassword -Credential $Global:credential -Identity $result -Reset
+				Set-ADAccountPassword -Credential $credential -Identity $result -Reset
 }

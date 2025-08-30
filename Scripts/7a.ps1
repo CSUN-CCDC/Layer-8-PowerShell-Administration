@@ -9,4 +9,4 @@ foreach ($OU in $OUArr) {
 $choose = Read-Host "Choose OU"
 $result = $listArray[$choose - 1]
 Write-Host -ForegroundColor Yellow "$result CHOSEN"
-Get-ADUser -Filter * -SearchBase "$result" | Select-Object -ExpandProperty SamAccountName | ForEach-Object { Set-ADUser -Credential $Global:credential -Identity $_ -EMailAddress "$_@AnimeHealth.net" }
+Get-ADUser -Filter * -SearchBase "$result" | Select-Object -ExpandProperty SamAccountName | ForEach-Object { Set-ADUser -Credential $credential -Identity $_ -EMailAddress "$_@AnimeHealth.net" }
