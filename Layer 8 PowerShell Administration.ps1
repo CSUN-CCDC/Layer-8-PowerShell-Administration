@@ -59,7 +59,7 @@ Write-Host -ForegroundColor Red @"
 #>
 
 try {
-	$credential = Get-Credential
+	$credential = Get-Credential -Message "Enter Domain Admin credentials"
 }
 catch {
 	Write-Host -ForegroundColor Yellow "No initial credential provided. This is fine."
