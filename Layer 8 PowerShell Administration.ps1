@@ -182,7 +182,7 @@ while ($start -eq $true) {
 
 		??? {
 
-			Get-Content "$PSScriptRoot Functions.txt"
+			Get-Content "$PSScriptRoot\Functions.txt"
 		}
 	
 		#Exit
