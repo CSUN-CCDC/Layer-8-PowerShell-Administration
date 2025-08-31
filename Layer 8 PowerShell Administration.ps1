@@ -168,6 +168,7 @@ while ($start -eq $true) {
 		? {
 	
 			#powershell -file .\Help.ps1
+			Import-CSV "$PSScriptRoot\HELP.csv"
 			break
 
 		}
