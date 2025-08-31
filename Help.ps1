@@ -1,1 +1,1 @@
-Import-CSV .\HELP.csv
+Import-CSV "$PSScriptRoot\HELP.csv"

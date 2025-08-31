@@ -1,0 +1,12 @@
+1a -> Ping-LocalADMachines
+2a -> Reset-LocalADUserPassword
+3a -> Invoke-PodGPUpdate
+4a -> Restart-Pods
+5a -> Set-ADUserAccountExpiration
+6a -> Remove-ADAccountExpiration
+7a -> Set-ADAccountEmails
+100a -> Enable-PSRemotingInDomain
+100b -> Install-ChocolateyInDomain
+101a -> Get-InventoryDomainLocal
+102a -> Set-RandomADPasswords
+103a -> Stop-SMBv1
