@@ -64,7 +64,7 @@ try {
 catch {
 	Write-Host -ForegroundColor Yellow "No initial credential provided. This is fine."
 }
-powershell -file "$PSScriptRoot\Help.ps1"
+Import-CSV "$PSScriptRoot\HELP.csv"
 $start = $true
 while ($start -eq $true) {
 	$num = Read-Host "Enter a number"
@@ -415,7 +415,7 @@ while ($start -eq $true) {
 	}
 
 	function Unblock-Scripts {
-		Get-ChildItem -Filter *.ps1 -Recurse -Path $PSScriptRoot | ForEach-Object { Unblock-File $_ }
+		Get-ChildItem -Filter * -Recurse -Path $PSScriptRoot | ForEach-Object { Unblock-File $_ }
 	}
 
 	#Is the verb 'Shuffle' ok?
