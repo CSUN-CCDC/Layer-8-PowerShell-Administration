@@ -69,6 +69,10 @@ $start = $true
 while ($start -eq $true) {
 	$num = Read-Host "Enter a number"
 	switch ($num) {
+		0a {
+			Unblock-Scripts
+		}
+		
 		1a {
 		
 			#powershell -file ".\Scripts\1a.ps1"
