@@ -64,7 +64,7 @@ try {
 catch {
 	Write-Host -ForegroundColor Yellow "No initial credential provided. This is fine."
 }
-Import-CSV "$PSScriptRoot\HELP.csv"
+powershell -file Help.ps1 -path $PSScriptRoot
 $start = $true
 while ($start -eq $true) {
 	$num = Read-Host "Enter a number"
@@ -171,8 +171,7 @@ while ($start -eq $true) {
 		#Help
 		? {
 	
-			#powershell -file .\Help.ps1
-			Import-CSV "$PSScriptRoot\HELP.csv"
+			powershell -file Help.ps1 -path $PSScriptRoot
 			break
 
 		}
