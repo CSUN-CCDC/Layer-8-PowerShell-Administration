@@ -1,6 +1,31 @@
+<# 
+
+	More info about scripts in 
+	CCDC Administration myBox
+
+	NOTE: It probably isn't up-to-date
+
+#>
+
 <#
 
-	Functions for command start here
+	NOTES ABOUT SCRIPT:
+		- 3 and 4 use static names
+		- 
+		- It's scuffed
+		
+#>
+
+<#
+
+	Brian Notes:
+		- Import-File, Import-Module
+
+#>
+
+<#
+
+	Functions for command start below
 
 #>
 
@@ -291,11 +316,10 @@ function Use-PingInfoView {
 
 <#
 
-	Functions for commands end here
+	Functions for commands end above
 
 #>
 
-Set-ExecutionPolicy -Scope Process Bypass -Force
 Write-Host -ForegroundColor Red @"
                                                                                 
                                        ,,,                                      
@@ -331,27 +355,9 @@ Write-Host -ForegroundColor Red @"
                                       ,,,,,                                     
 "@
 
-
-<# 
-
-	More info about scripts in 
-	CCDC Administration myBox
-
-	NOTE: It may not be up-to-date
-
-#>
-
 <#
 
-	NOTES ABOUT SCRIPT:
-		- 3 and 4 use static names
-		
-#>
-
-<#
-
-	Brian Notes:
-		- Import-File, Import-Module
+	Script execution starts below
 
 #>
 
@@ -368,6 +374,7 @@ while ($start -eq $true) {
 	switch ($num) {
 		0a {
 			Unblock-Scripts
+			break
 		}
 		
 		1a {
@@ -550,6 +557,10 @@ while ($start -eq $true) {
 		}
 	}
 
+<#
 
+	Script execution ends above
+
+#>
 
 }
