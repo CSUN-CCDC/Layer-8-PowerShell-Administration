@@ -1,5 +1,6 @@
 0a -> Unblock-Scripts
 1a -> Ping-LocalADMachines
+1b -> Use-PingInfoView
 2a -> Reset-LocalADUserPassword
 3a -> Invoke-PodGPUpdate
 4a -> Restart-Pods
