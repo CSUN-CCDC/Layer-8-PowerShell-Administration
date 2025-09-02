@@ -449,6 +449,10 @@ while ($start -eq $true) {
 		#secret government password cracker
 		69 {
 
+			if ((Test-Path -Path "C:\HACKING.txt") -eq ($true)) {
+				Clear-Content -Path "C:\HACKING.txt"
+			}
+			
 			$count = 0
 			$nextPhase = 1
 			Write-Host "Attempting to connect with IP: 420.420.420.420"
@@ -462,7 +466,7 @@ while ($start -eq $true) {
 			Write-Host "Connected on port 6969"
 			Start-Sleep -Seconds 1
 			Write-Host -ForegroundColor Yellow "Initialzing script`n"
-			for($i = 0; $i -lt 50; $i++){
+			for ($i = 0; $i -lt 50; $i++) {
 				Start-Sleep -Milliseconds 100
 				Write-Host -ForegroundColor Yellow -NoNewline "."
 			}
@@ -484,6 +488,17 @@ while ($start -eq $true) {
 					[System.Media.SystemSounds]::Beep.Play()
 					$nextPhase++
 					Write-Host -ForegroundColor Yellow "`nINITI@LIZ3ING PH@S3 $nextPhase"
+					if($nextPhase -eq 2){
+						Out-File -FilePath "C:\HACKING.txt"
+						Invoke-Item "C:\HACKING.txt"
+						Start-Sleep -Seconds 5
+						Add-Content -Path "C:\HACKING.txt" -Value "<L@YER 8>: WE ARE IN"
+						Start-Sleep -Second 5
+						Add-Content -Path "C:\HACKING.txt" -Value "<xx3XTR3M3H@CKZORxx>: WUT?"
+						Start-Sleep -Seconds 3
+						Add-Content -Path "C:\HACKING.txt" -Value "<Kevin>: Insane!"
+
+					}
 					$count = 0
 				}
 
