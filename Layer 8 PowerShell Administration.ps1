@@ -450,7 +450,8 @@ while ($start -eq $true) {
 		69 {
 
 			$count = 0
-			$nextPhase = 0
+			$nextPhase = 1
+			Write-Host "Attempting to connect with IP: 420.420.420.420"
 			Start-Sleep -Seconds 5
 			Write-Host "Trying to Connect..."
 			Start-Sleep -Seconds 5
@@ -460,7 +461,16 @@ while ($start -eq $true) {
 			Start-Sleep -Seconds 2
 			Write-Host "Connected on port 6969"
 			Start-Sleep -Seconds 1
-			Write-Host -ForegroundColor Red "CR@CKING THE G0V3RNM3NT DATABASE.ps1 INITI@LIZ3D"
+			Write-Host -ForegroundColor Yellow "Initialzing script`n"
+			for($i = 0; $i -lt 50; $i++){
+				Start-Sleep -Milliseconds 100
+				Write-Host -ForegroundColor Yellow -NoNewline "."
+			}
+			Start-Sleep -Seconds 1
+			Write-Host -ForegroundColor Red "`nCR@CKING CSUN M@INFR@AM3.ps1 INITI@LIZ3D"
+			Start-Sleep -Seconds 1
+			Write-Host -ForegroundColor Yellow "INITI@LIZ3ING PH@S3 1"
+			Start-Sleep -Milliseconds 500
 			while ($true) {
 				$characters = @("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
 					"n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
