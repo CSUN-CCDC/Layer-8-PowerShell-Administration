@@ -169,6 +169,7 @@ function Enable-PSRemotingInDomain {
 	gpupdate /force
 }
 
+#UNFINISHED SCRIPT
 function Install-ChocolateyInDomain {
 	Invoke-Command {
     
@@ -310,7 +311,20 @@ function Set-RandomADPasswords {
 }
 
 #PingInfoView may not be allowed during comp...will get to later
+#UNFINISHED SCRIPT
 function Use-PingInfoView {
+	$writing = $true
+	$hostsList = @()
+	while ($writing -eq $true) {
+
+		$read = Read-Host "Enter one host at a time"
+		$hostsList += "$read`r`n"
+		if ($read -eq "") {
+			$writing = $false
+	
+		}
+
+	}
 
 }
 
@@ -557,7 +571,7 @@ while ($start -eq $true) {
 		}
 	}
 
-<#
+	<#
 
 	Script execution ends above
 

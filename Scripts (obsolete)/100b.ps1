@@ -1,3 +1,0 @@
-Invoke-Command {
-    
-}

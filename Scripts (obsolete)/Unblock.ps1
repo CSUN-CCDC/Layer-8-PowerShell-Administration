@@ -1,1 +1,0 @@
-Get-ChildItem -Filter *.ps1 -Recurse | ForEach-Object {Unblock-File $_}
