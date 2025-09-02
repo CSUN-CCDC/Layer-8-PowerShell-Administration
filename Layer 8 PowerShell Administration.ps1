@@ -127,6 +127,42 @@ while ($start -eq $true) {
 			break
 
 		}
+
+		#secret government password cracker
+		69 {
+
+			$count = 0
+			$nextPhase = 0
+			Start-Sleep -Seconds 5
+			Write-Host "Trying to Connect..."
+			Start-Sleep -Seconds 5
+			Write-Host "Trying to Connect..."
+			Start-Sleep -Seconds 5
+			Write-Host "Target Found!"
+			Start-Sleep -Seconds 2
+			Write-Host "Connected on port 6969"
+			Start-Sleep -Seconds 1
+			Write-Host -ForegroundColor Red "CR@CKING THE G0V3RNM3NT DATABASE.ps1 INITI@LIZ3D"
+			while ($true) {
+				$characters = @("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+					"n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
+					"N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "!", "@", "#", "$", "%" , "^", "&", "*", 
+					"(", ")", "-", "_", "=", "+", "[", "]", "{", "}", "\", "|", ";", ":", "'", "\", ",", ".", "/", "<", ">", "?")
+				$getRandom = $characters | Get-Random
+				Start-Sleep -Milliseconds 10
+				Write-Host -NoNewline -ForegroundColor Green "$getRandom"
+				$count++
+				if($count -ge 2500){
+					[System.Media.SystemSounds]::Beep.Play()
+					$nextPhase++
+					Write-Host -ForegroundColor Yellow "`nINITI@LIZ3ING PH@S3 $nextPhase"
+					$count = 0
+				}
+
+			}
+			
+			break
+		}
 		
 		<#
 		Below are CCDC Scripts
@@ -326,7 +362,7 @@ while ($start -eq $true) {
 		}
 		
 		$inp = Read-Host "Enter numbers"
-		$numbers = $inp -split ',' | Where-Object { $_ -ne "" } | ForEach-Object { [int]$_ }
+		$numbers = $inp -split ', ' | Where-Object { $_ -ne "" } | ForEach-Object { [int]$_ }
 		foreach ($number in $numbers) {
 			Clear-ADAccountExpiration -Identity $listArray[$number - 1]
 			
@@ -449,21 +485,21 @@ while ($start -eq $true) {
 				switch ($txtFile) {
 					1 {
 			   # We don't want repeats of words
-			   if ($null -ne $noun) {
+						if ($null -ne $noun) {
 							break
-			   }
-			   $noun = Get-Random -InputObject (Get-Content "$PSScriptRoot\Passphrases\Nouns.txt")
-			   $count++
-			   $passphrase += $noun + "-"
+						}
+						$noun = Get-Random -InputObject (Get-Content "$PSScriptRoot\Passphrases\Nouns.txt")
+						$count++
+						$passphrase += $noun + "-"
 					}
 
 					2 {
-			   if ($null -ne $verb) {
+						if ($null -ne $verb) {
 							break
-			   } 
-			   $verb = Get-Random -InputObject (Get-Content "$PSScriptRoot\Passphrases\Verbs.txt")
-			   $count++
-			   $passphrase += $verb + "-"
+						} 
+						$verb = Get-Random -InputObject (Get-Content "$PSScriptRoot\Passphrases\Verbs.txt")
+						$count++
+						$passphrase += $verb + "-"
 			   
 					}
 
