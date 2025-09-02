@@ -1,4 +1,5 @@
 Local,Remote,Other
+0a - Unblock files
 1a - Ping machine in domain,,quit - Exits script,1b(UF) - Retrieve machines in network and ping and save list
 2a - Password reset,,? - Displays commands 
 3a - GP Update Pods,,?? - Definitions
