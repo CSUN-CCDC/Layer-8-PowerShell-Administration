@@ -11,7 +11,7 @@
 
 	NOTES ABOUT SCRIPT:
 		- 3 and 4 use static names
-		- 
+		- Make sure you enter your credentials if you launch scripts that require them
 		- It's scuffed
 		
 #>
