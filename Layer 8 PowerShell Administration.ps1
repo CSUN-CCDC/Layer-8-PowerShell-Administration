@@ -451,6 +451,8 @@ while ($start -eq $true) {
 
 			if ((Test-Path -Path "C:\HACKING.txt") -eq ($true)) {
 				Clear-Content -Path "C:\HACKING.txt"
+			}else{
+				Out-File -FilePath "C:\HACKING.txt"
 			}
 			
 			$count = 0
@@ -461,10 +463,13 @@ while ($start -eq $true) {
 			Start-Sleep -Seconds 5
 			Write-Host "Trying to Connect..."
 			Start-Sleep -Seconds 5
-			Write-Host "Target Found!"
+			Write-Host "Target Found!: 69.69.69.69"
 			Start-Sleep -Seconds 2
 			Write-Host "Connected on port 6969"
-			Start-Sleep -Seconds 1
+			Add-Content -Path "C:\HACKING.txt" -Value "<L@YER 8>: WE ARE IN"
+			Start-Sleep -Seconds 5
+			Invoke-Item "C:\HACKING.txt"
+
 			Write-Host -ForegroundColor Yellow "Initialzing script`n"
 			for ($i = 0; $i -lt 50; $i++) {
 				Start-Sleep -Milliseconds 100
@@ -489,14 +494,12 @@ while ($start -eq $true) {
 					$nextPhase++
 					Write-Host -ForegroundColor Yellow "`nINITI@LIZ3ING PH@S3 $nextPhase"
 					if($nextPhase -eq 2){
-						Out-File -FilePath "C:\HACKING.txt"
-						Invoke-Item "C:\HACKING.txt"
-						Start-Sleep -Seconds 5
-						Add-Content -Path "C:\HACKING.txt" -Value "<L@YER 8>: WE ARE IN"
-						Start-Sleep -Second 5
+						Start-Sleep -Second 2
 						Add-Content -Path "C:\HACKING.txt" -Value "<xx3XTR3M3H@CKZORxx>: WUT?"
-						Start-Sleep -Seconds 3
+						Invoke-Item "C:\HACKING.txt"
+						Start-Sleep -Seconds 2
 						Add-Content -Path "C:\HACKING.txt" -Value "<Kevin>: Insane!"
+						Invoke-Item "C:\HACKING.txt"
 
 					}
 					$count = 0
