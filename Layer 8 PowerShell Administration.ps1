@@ -575,7 +575,6 @@ while ($start -eq $true) {
 	
 		quit {
 			
-			$credential = Clear-Variable
 			$start = $false
 			break
 
