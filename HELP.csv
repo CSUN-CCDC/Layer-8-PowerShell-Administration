@@ -7,7 +7,10 @@ Local,Remote,Other
 5a - Set expiration date for all users in specific OU 
 6a - Get rid of expiration date for specific users
 7a - Set email address for all users
+8a(UF) - Add AD User
+100 - Ping info view domain
 100a(CCDC)(UF) - Enable PS Remoting on all machines across domain via GP (WinRM),100b(CCDC)(UF) - Install chocolatey
 101a(CCDC) - Get inventory for all machines across domain
 102a(CCDC) - Shuffle AD creds
 103a(CCDC) - Turn SMBv1 Off
+104a(CCDC)(UF) - User monitor

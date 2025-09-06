@@ -328,6 +328,17 @@ function Use-PingInfoView {
 
 }
 
+function Get-UserMonitor {
+	$adUsers = Get-ADUser -Filter * | Select-Object -ExpandProperty SamAccountName
+	foreach($adUser in $adUsers){
+		$lastpsswrd = Get-ADUser -Identity $adUser -Properties pwdLastSet
+		$output = @($adUser + ": " + $lastpsswrd)
+		$output += $output
+	}
+
+	Write-Host $output
+}
+
 <#
 
 	Functions for commands end above
@@ -547,6 +558,12 @@ while ($start -eq $true) {
 
 			#powershell -file .\Scripts\SMBv1Off.ps1
 			Stop-SMBv1
+			break
+		}
+
+		104a {
+
+			Get-UserMonitor
 			break
 		}
 
