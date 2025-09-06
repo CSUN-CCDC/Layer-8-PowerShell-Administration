@@ -25,6 +25,20 @@
 
 <#
 
+	Import module commands start below
+
+#>
+
+Import-Module -Name "$PSScriptRoot\Private\lib\ImportExcel" -Verbose
+
+<#
+
+	Import module commands end above
+
+#>
+
+<#
+
 	Functions for command start below
 
 #>
