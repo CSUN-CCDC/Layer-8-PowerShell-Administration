@@ -596,14 +596,17 @@ while ($start -eq $true) {
 			Write-Host -ForegroundColor Yellow "(UF): Unfinished"
 
 		}
+<#
 
 		??? {
-
+			
+			
 			Get-Content "$PSScriptRoot\Functions.txt"
 		}
-	
+
+		#>	
+		
 		#Exit
-	
 		quit {
 			
 			$start = $false

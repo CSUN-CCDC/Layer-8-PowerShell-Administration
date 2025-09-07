@@ -3,7 +3,7 @@ Local,Remote,Other
 1a - Ping machine in domain,1b(UF) - Retrieve machines in network and ping and save list,quit - Exits script
 2a - Password reset,,? - Displays commands 
 3a - GP Update Pods,,?? - Definitions
-4a - Restart Pods,,??? - Functions 
+4a - Restart Pods
 5a - Set expiration date for all users in specific OU 
 6a - Get rid of expiration date for specific users
 7a - Set email address for all users
