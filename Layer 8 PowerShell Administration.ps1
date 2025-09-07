@@ -20,6 +20,7 @@
 
 	Brian Notes:
 		- Import-File, Import-Module
+		- Create web server with all files needed for comp
 
 #>
 
@@ -596,15 +597,12 @@ while ($start -eq $true) {
 			Write-Host -ForegroundColor Yellow "(UF): Unfinished"
 
 		}
-<#
 
+		<#
 		??? {
-			
-			
 			Get-Content "$PSScriptRoot\Functions.txt"
 		}
-
-		#>	
+		#>
 		
 		#Exit
 		quit {
