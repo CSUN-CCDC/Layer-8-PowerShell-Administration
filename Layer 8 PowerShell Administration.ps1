@@ -47,7 +47,7 @@ elseif ($unblockScriptsCond -eq "N") {
 	$unblockScriptsCond = $false
 }
 else {
-	Write-Host -ForegroundColor Yellow "I'll do it anyways"
+	Write-Host -ForegroundColor Magenta "I'll do it anyways"
 	Unblock-Scripts
 	$unblockScriptsCond = $true
 }
