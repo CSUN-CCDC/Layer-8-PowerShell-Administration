@@ -1,3 +1,8 @@
+#0a
+function Unblock-Scripts {
+	(Get-ChildItem -Filter * -Path $PSScriptRoot -Recurse).PSPath | ForEach-Object { Unblock-File $_ }
+}
+
 <# 
 
 	More info about scripts in 
@@ -31,6 +36,20 @@
 
 #>
 
+#I'd recommend doing this
+$unblockScriptsCond = Read-Host "Unblock all scripts? (Y/N)"
+if ($unblockScriptsCond -eq "Y") {
+	Unblock-Scripts
+}
+elseif ($unblockScriptsCond -eq "N") {
+	Write-Host -ForegroundColor Yellow "Ok"
+}
+else {
+	Write-Host -ForegroundColor Yellow "I'll try anyways"
+	Unblock-Scripts
+}
+
+
 Import-Module -Name "$PSScriptRoot\Private\lib\ImportExcel" -Verbose
 
 <#
@@ -47,11 +66,6 @@ Import-Module -Name "$PSScriptRoot\Private\lib\ImportExcel" -Verbose
 		- Comments above functions show which switch statement its linked to
 
 #>
-
-#0a
-function Unblock-Scripts {
-	(Get-ChildItem -Filter * -Path $PSScriptRoot -Recurse).PSPath | ForEach-Object { Unblock-File $_ }
-}
 
 #1a
 function Ping-LocalADMachines {
