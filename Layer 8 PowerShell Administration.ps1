@@ -21,6 +21,7 @@
 	Brian Notes:
 		- Import-File, Import-Module
 		- Create web server with all files needed for comp
+		- Secure the psswrdshfl script
 
 #>
 
@@ -49,7 +50,7 @@ Import-Module -Name "$PSScriptRoot\Private\lib\ImportExcel" -Verbose
 
 #0a
 function Unblock-Scripts {
-	Get-ChildItem -Filter * -Recurse -Path $PSScriptRoot | ForEach-Object { Unblock-File $_ }
+	(Get-ChildItem -Filter * -Path $PSScriptRoot -Recurse).PSPath | ForEach-Object { Unblock-File $_ }
 }
 
 #1a
@@ -221,7 +222,7 @@ function Enable-PSRemotingInDomain {
 #100b UNFINISHED SCRIPT
 function Install-ChocolateyInDomain {
 	Invoke-Command {
-    Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+		Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 	}
 }
 
@@ -357,18 +358,6 @@ function Stop-SMBv1 {
 
 }
 
-#104a
-function Get-UserMonitor {
-	$adUsers = Get-ADUser -Filter * | Select-Object -ExpandProperty SamAccountName
-	foreach($adUser in $adUsers){
-		$lastpsswrd = Get-ADUser -Identity $adUser -Properties pwdLastSet
-		$output = @($adUser + ": " + $lastpsswrd)
-		$output += $output
-	}
-
-	Write-Host $output
-}
-
 <#
 
 	Functions for commands end above
@@ -487,7 +476,8 @@ while ($start -eq $true) {
 
 			if ((Test-Path -Path "C:\HACKING.txt") -eq ($true)) {
 				Clear-Content -Path "C:\HACKING.txt"
-			}else{
+			}
+			else {
 				Out-File -FilePath "C:\HACKING.txt"
 			}
 			
@@ -529,7 +519,7 @@ while ($start -eq $true) {
 					[System.Media.SystemSounds]::Beep.Play()
 					$nextPhase++
 					Write-Host -ForegroundColor Yellow "`nINITI@LIZ3ING PH@S3 $nextPhase"
-					if($nextPhase -eq 2){
+					if ($nextPhase -eq 2) {
 						Start-Sleep -Second 2
 						Add-Content -Path "C:\HACKING.txt" -Value "<xx3XTR3M3H@CKZORxx>: WUT?"
 						Invoke-Item "C:\HACKING.txt"
@@ -587,8 +577,10 @@ while ($start -eq $true) {
 
 		104a {
 
-			Get-UserMonitor
+			#Get-UserMonitor
+			#Start-Process file here
 			break
+
 		}
 
 		#Help
@@ -623,9 +615,16 @@ while ($start -eq $true) {
 		}
 		
 		#test switch
+		#Function currently working on: 8a
 		999 {
 	
-
+			$credential = Get-Credential
+			$user = "TTest" 
+			$count = 1
+			while ($count -le 10) {
+				New-ADUser -Name ("$user" + "0$count") -SamAccountName ("$user" + "0$count") -PasswordNotRequired $true -Credential $credential -Passthru
+				$count++
+			}
 			
 		}
 	
