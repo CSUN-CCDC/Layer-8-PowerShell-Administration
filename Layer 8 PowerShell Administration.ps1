@@ -11,7 +11,7 @@
 
 	NOTES ABOUT SCRIPT:
 		- 3 and 4 use static names
-		- Make sure you enter your credentials if you launch scripts that require them
+		- Make sure you enter your credentials immediately if you launch scripts that require them
 		- It's scuffed
 		
 #>
@@ -42,8 +42,17 @@ Import-Module -Name "$PSScriptRoot\Private\lib\ImportExcel" -Verbose
 
 	Functions for command start below
 
+	NOTES:
+		- Comments above functions show which switch statement its linked to
+
 #>
 
+#0a
+function Unblock-Scripts {
+	Get-ChildItem -Filter * -Recurse -Path $PSScriptRoot | ForEach-Object { Unblock-File $_ }
+}
+
+#1a
 function Ping-LocalADMachines {
 		
 	$listArray = @()
@@ -61,6 +70,25 @@ function Ping-LocalADMachines {
 	Test-NetConnection $result
 }
 
+#PingInfoView may not be allowed during comp...will get to later
+#1b UNFINISHED SCRIPT
+function Use-PingInfoView {
+	$writing = $true
+	$hostsList = @()
+	while ($writing -eq $true) {
+
+		$read = Read-Host "Enter one host at a time"
+		$hostsList += "$read`r`n"
+		if ($read -eq "") {
+			$writing = $false
+	
+		}
+
+	}
+
+}
+
+#2a
 function Reset-LocalADUserPassword {
 	$listArray = @()
 	$numList = 1
@@ -100,6 +128,7 @@ function Reset-LocalADUserPassword {
 	}
 }
 
+#3a
 function Invoke-PodGPUpdate {
 	$condition = Read-Host "GPU and Restart Machines (Y/N)"
 	if ($condition -eq "Y") {
@@ -114,10 +143,12 @@ function Invoke-PodGPUpdate {
 	}
 }
 
+#4a
 function Restart-Pods {
 	Restart-Computer NPOD1, NPOD2, NPOD3, NPOD4, WPOD1, WPOD2, WPOD3, WPOD4, LPOD1, LPOD2, LPOD3, LPOD4 -Force -Confirm
 }
 
+#5a
 function Set-ADUserAccountExpiration {
 	$listArray = @()
 	$numList = 1
@@ -142,6 +173,7 @@ function Set-ADUserAccountExpiration {
 	}
 }
 
+#6a
 function Remove-ADAccountExpiration {
 	$listArray = @()
 	$numList = 1
@@ -161,6 +193,7 @@ function Remove-ADAccountExpiration {
 		
 }
 
+#7a
 function Set-ADAccountEmails {
 	$listArray = @()
 	$numList = 1
@@ -176,6 +209,7 @@ function Set-ADAccountEmails {
 	Get-ADUser -Filter * -SearchBase "$result" | Select-Object -ExpandProperty SamAccountName | ForEach-Object { Set-ADUser -Credential $credential -Identity $_ -EMailAddress "$_@AnimeHealth.net" }
 }
 
+#100a
 function Enable-PSRemotingInDomain {
 	$location = (Get-Location).Path
 	$distN = Get-ADDomain | Select-Object -ExpandProperty DistinguishedName
@@ -184,13 +218,14 @@ function Enable-PSRemotingInDomain {
 	gpupdate /force
 }
 
-#UNFINISHED SCRIPT
+#100b UNFINISHED SCRIPT
 function Install-ChocolateyInDomain {
 	Invoke-Command {
     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 	}
 }
 
+#101a
 function Get-InventoryDomainLocal {
 		
 	if (!(Test-Path -Path "C:\output")) {
@@ -229,27 +264,7 @@ function Get-InventoryDomainLocal {
 			
 }
 
-function Stop-SMBv1 {
-	#Turns SMB1 off
-	Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force
-
-	#Checks if SMB1 if off
-	$test = (Get-SmbServerConfiguration).EnableSMB1Protocol 
-
-	if ($test -eq $false) {
-		Write-Host "Success"
-	}
-	else {
-		Write-Host "Failure"
-	}
-
-}
-
-function Unblock-Scripts {
-	Get-ChildItem -Filter * -Recurse -Path $PSScriptRoot | ForEach-Object { Unblock-File $_ }
-}
-
-#Is the verb 'Shuffle' ok?
+#102a Is the verb 'Shuffle' ok?
 function Set-RandomADPasswords {
 	#add random characters
 	if (!(Test-Path -Path "C:\output")) {
@@ -325,24 +340,24 @@ function Set-RandomADPasswords {
 
 }
 
-#PingInfoView may not be allowed during comp...will get to later
-#UNFINISHED SCRIPT
-function Use-PingInfoView {
-	$writing = $true
-	$hostsList = @()
-	while ($writing -eq $true) {
+#103a
+function Stop-SMBv1 {
+	#Turns SMB1 off
+	Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force
 
-		$read = Read-Host "Enter one host at a time"
-		$hostsList += "$read`r`n"
-		if ($read -eq "") {
-			$writing = $false
-	
-		}
+	#Checks if SMB1 if off
+	$test = (Get-SmbServerConfiguration).EnableSMB1Protocol 
 
+	if ($test -eq $false) {
+		Write-Host "Success"
+	}
+	else {
+		Write-Host "Failure"
 	}
 
 }
 
+#104a
 function Get-UserMonitor {
 	$adUsers = Get-ADUser -Filter * | Select-Object -ExpandProperty SamAccountName
 	foreach($adUser in $adUsers){
@@ -413,20 +428,20 @@ while ($start -eq $true) {
 	$num = Read-Host "Enter a command"
 	switch ($num) {
 		0a {
+			
 			Unblock-Scripts
 			break
+			
 		}
 		
 		1a {
 		
-			#powershell -file ".\Scripts\1a.ps1"
 			Ping-LocalADMachines
 			break
 		}
 	
 		2a {
 				
-			#powershell -file ".\Scripts\2a.ps1"
 			Reset-LocalADUserPassword
 			break
 
@@ -434,7 +449,6 @@ while ($start -eq $true) {
 	
 		3a {
 	
-			#powershell -file ".\Scripts\3a.ps1"
 			Invoke-PodGPUpdate
 			break
 
@@ -442,7 +456,6 @@ while ($start -eq $true) {
 		
 		4a {
 	
-			#powershell -file ".\Scripts\4a.ps1"
 			Restart-Pods
 			break
 
@@ -450,7 +463,6 @@ while ($start -eq $true) {
 	
 		5a {
 	
-			#powershell -file ".\Scripts\5a.ps1"
 			Set-ADUserAccountExpiration
 			break
 
@@ -458,7 +470,6 @@ while ($start -eq $true) {
 	
 		6a {
 			
-			#powershell -file ".\Scripts\6a.ps1"
 			Remove-ADAccountExpiration
 			break
 
@@ -466,7 +477,6 @@ while ($start -eq $true) {
 	
 		7a {
 	
-			#powershell -file ".\Scripts\7a.ps1"
 			Set-ADAccountEmails
 			break
 
@@ -537,8 +547,10 @@ while ($start -eq $true) {
 		}
 		
 		<#
+		
 		Below are CCDC Scripts
-	#>
+		
+		#>
 		
 		100a {
 		
@@ -555,7 +567,6 @@ while ($start -eq $true) {
 		
 		101a {
 			
-			#powershell -file ".\Scripts\101a.ps1"
 			Get-InventoryDomainLocal
 			break
 	
@@ -563,7 +574,6 @@ while ($start -eq $true) {
 
 		102a {
 			
-			#powershell -file .\Passphrases\psswrdshfl.ps1
 			Set-RandomADPasswords
 			break
 
@@ -571,7 +581,6 @@ while ($start -eq $true) {
 		
 		103a {
 
-			#powershell -file .\Scripts\SMBv1Off.ps1
 			Stop-SMBv1
 			break
 		}
@@ -595,6 +604,7 @@ while ($start -eq $true) {
 			Write-Host -ForegroundColor Yellow "Local: Can only be run on computer connected to domain."
 			Write-Host -ForegroundColor Yellow "Remote: Can be run on any machine connected to a network (Uses WinRM)"
 			Write-Host -ForegroundColor Yellow "(UF): Unfinished"
+			Write-Host -ForegroundColor Yellow "(NT): Not implemented"
 
 		}
 
@@ -612,18 +622,12 @@ while ($start -eq $true) {
 
 		}
 		
-	
-	
 		#test switch
 		999 {
 	
-			$gpoName = Read-Host "Enter GPO Name"
-			New-GPO $gpoName
-			New-GPLink -Name $gpoName -Target (Get-ADRootDSE | Select-Object -ExpandProperty rootDomainNamingContext)
+
 			
 		}
-	
-	
 	
 		default {
 			Read-Host "Relaunch script: Invalid Number/Command (Press Enter)"
