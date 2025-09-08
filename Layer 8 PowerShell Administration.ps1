@@ -36,21 +36,25 @@ function Unblock-Scripts {
 
 #>
 
-#I'd recommend doing this
-$unblockScriptsCond = Read-Host "Unblock all scripts? (Y/N)"
+# Will load all modules if you choose yes
+$unblockScriptsCond = Read-Host "Unblock all scripts? (Use if you want to load all features) [Y/N]"
 if ($unblockScriptsCond -eq "Y") {
 	Unblock-Scripts
+	$unblockScriptsCond = $true
 }
 elseif ($unblockScriptsCond -eq "N") {
 	Write-Host -ForegroundColor Yellow "Ok"
+	$unblockScriptsCond = $false
 }
 else {
-	Write-Host -ForegroundColor Yellow "I'll try anyways"
+	Write-Host -ForegroundColor Yellow "I'll do it anyways"
 	Unblock-Scripts
+	$unblockScriptsCond = $true
 }
 
-
-Import-Module -Name "$PSScriptRoot\Private\lib\ImportExcel" -Verbose
+if ($unblockScriptsCond -eq $true) {
+	Import-Module -Name "$PSScriptRoot\Private\lib\ImportExcel" -Verbose
+}
 
 <#
 
