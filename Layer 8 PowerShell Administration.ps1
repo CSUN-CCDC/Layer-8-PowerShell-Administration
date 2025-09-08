@@ -27,6 +27,7 @@ function Unblock-Scripts {
 		- Import-File, Import-Module
 		- Create web server with all files needed for comp
 		- Secure the psswrdshfl script
+		- Change file permissions for output folder
 
 #>
 
@@ -595,8 +596,7 @@ while ($start -eq $true) {
 
 		104a {
 
-			#Get-UserMonitor
-			#Start-Process file here
+			Start-Process -FilePath $PSScriptRoot\Scripts\userMonitor.ps1
 			break
 
 		}
