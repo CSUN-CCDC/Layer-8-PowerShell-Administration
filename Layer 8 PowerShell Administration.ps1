@@ -592,11 +592,12 @@ while ($start -eq $true) {
 
 			Stop-SMBv1
 			break
+
 		}
 
 		104a {
 
-			Start-Process -FilePath $PSScriptRoot\Scripts\userMonitor.ps1
+			Start-Process -FilePath "powershell" -ArgumentList $PSScriptRoot\Scripts\userPasswordMonitor.ps1
 			break
 
 		}
