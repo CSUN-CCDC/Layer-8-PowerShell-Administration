@@ -1,3 +1,8 @@
+if (!(Test-Path -Path "C:\output")) {
+		New-Item -ItemType Directory -Path "C:\output"
+		Set-Acl -Path "C:\output" -AclObject $PSScriptRoot\Other\outputacl.txt
+	} 
+
 #0a
 function Unblock-Scripts {
 	(Get-ChildItem -Filter * -Path $PSScriptRoot -Recurse).PSPath | ForEach-Object { Unblock-File $_ }
