@@ -2,7 +2,6 @@
 # Will remove date
 # MAKE YOU SET PASSWORDS FOR ALL USERS IN ORDER FOR THIS TO WORK PROPERLY
 
-$iniadUsers = @(Get-ADUser -Filter * | Select-Object -ExpandProperty SamAccountName | Sort-Object)
 $iniCount = (get-aduser -filter * | Measure-Object).Count
 $inilastPassR = @(get-aduser -filter * -Properties PasswordLastSet | Select-Object -ExpandProperty PasswordLastSet | Sort-Object)
 $index = 0
@@ -15,11 +14,11 @@ while ($true) {
     foreach ($adUser in $adUsers) {
 		
         $lastPassR = Get-ADUser -Identity $adUser -Properties PasswordLastSet | Select-Object -ExpandProperty PasswordLastSet | Sort-Object
-		if(($iniadUsers[$index] -eq $adUser) -or ($inilastPassR[$index] -eq $lastPassR)){
-			Write-Host $adUser": $lastPassR"
-		}else{
+		if($inilastPassR[$index] -ne $lastPassR){
 			Write-Host -ForegroundColor Red $adUser": $lastPassR"
 		}
+		
+			Write-Host $adUser": $lastPassR"
 		
 		$index++
 
