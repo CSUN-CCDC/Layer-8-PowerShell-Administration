@@ -3,7 +3,7 @@
 # MAKE YOU SET PASSWORDS FOR ALL USERS IN ORDER FOR THIS TO WORK PROPERLY
 
 $iniCount = (get-aduser -filter * | Measure-Object).Count
-$inilastPassR = @(get-aduser -filter * -Properties PasswordLastSet | Select-Object -ExpandProperty PasswordLastSet | Sort-Object)
+$inilastPassR = Get-ADUser -Filter * | Select-Object -ExpandProperty SamAccountName | Sort-Object | ForEach-Object {(Get-ADUser -Identity $_ -Properties PasswordLastSet | Select-Object -ExpandProperty PasswordLastSet).Second}
 $index = 0
 
 while ($true) {
@@ -13,12 +13,14 @@ while ($true) {
 	Write-Host -ForegroundColor Yellow $getDate
     foreach ($adUser in $adUsers) {
 		
-        $lastPassR = Get-ADUser -Identity $adUser -Properties PasswordLastSet | Select-Object -ExpandProperty PasswordLastSet | Sort-Object
+        $lastPassR = (Get-ADUser -Identity $adUser -Properties PasswordLastSet | Select-Object -ExpandProperty PasswordLastSet).Second
 		if($inilastPassR[$index] -ne $lastPassR){
 			Write-Host -ForegroundColor Red $adUser": $lastPassR"
 		}
-		
+			
+		if($inilastPassR[$index] -eq $lastPassR) {	
 			Write-Host $adUser": $lastPassR"
+		}
 		
 		$index++
 
