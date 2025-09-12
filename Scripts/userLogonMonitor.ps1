@@ -1,4 +1,5 @@
 # Might combine into one or give options to do either or later
+# Still glitching
 
 $iniCount = (get-aduser -filter * | Measure-Object).Count
 $iniLastLogon = (Get-ADUser -filter * -Properties lastlogon | Select-Object -ExpandProperty lastlogon | ForEach-Object {([datetime]$_).ToString()})
