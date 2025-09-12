@@ -603,6 +603,7 @@ while ($start -eq $true) {
 		104a {
 
 			Start-Process -FilePath "powershell" -ArgumentList $PSScriptRoot\Scripts\userPasswordMonitor.ps1
+			Start-Process -FilePath "powershell" -ArgumentList $PSScriptRoot\Scripts\userLogonMonitor.ps1
 			break
 
 		}

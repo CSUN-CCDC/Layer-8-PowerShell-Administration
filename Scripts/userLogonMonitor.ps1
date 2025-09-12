@@ -6,18 +6,19 @@ $index = 0
 
 while ($true) {
     $adUsers = Get-ADUser -Filter * | Select-Object -ExpandProperty SamAccountName | Sort-Object
-    Write-Host -ForegroundColor Green "`nUSER PASSWORD MONITOR:"
+    Write-Host -ForegroundColor Green "`nUSER LOGON MONITOR:"
 	$getDate = Get-Date -Format "HH:mm:ss"
 	Write-Host -ForegroundColor Yellow $getDate
     foreach ($adUser in $adUsers) {
 		
-        $lastPassR = (Get-ADUser -Identity $adUser -Properties PasswordLastSet | Select-Object -ExpandProperty PasswordLastSet).Second
-		if($inilastPassR[$index] -ne $lastPassR){
-			Write-Host -ForegroundColor Red $adUser": $lastPassR"
+        $lastLogon = (Get-ADUser -Identity $adUser -Properties lastlogon | Select-Object -ExpandProperty lastlogon)
+		$lastLogon = ([datetime]$lastLogon).ToString()
+		if($iniLastLogon[$index] -ne $lastLogon){
+			Write-Host -ForegroundColor Red $adUser": $lastLogon"
 		}
 			
-		if($inilastPassR[$index] -eq $lastPassR) {	
-			Write-Host $adUser": $lastPassR"
+		if($iniLastLogon[$index] -eq $lastLogon) {	
+			Write-Host $adUser": $lastLogon"
 		}
 		
 		$index++
