@@ -1,4 +1,5 @@
 # MAKE YOU SET PASSWORDS FOR ALL USERS IN ORDER FOR THIS TO WORK PROPERLY
+# I think I'll change to ToString instead of Second
 
 $iniCount = (get-aduser -filter * | Measure-Object).Count
 $inilastPassR = Get-ADUser -Filter * | Select-Object -ExpandProperty SamAccountName | Sort-Object | ForEach-Object {(Get-ADUser -Identity $_ -Properties PasswordLastSet | Select-Object -ExpandProperty PasswordLastSet).Second}
