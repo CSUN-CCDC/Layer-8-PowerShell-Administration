@@ -1,7 +1,7 @@
-# MAKE YOU SET PASSWORDS FOR ALL USERS IN ORDER FOR THIS TO WORK PROPERLY
-# I think I'll change to ToString instead of Second
+# Might combine into one or give options to do either or later
 
-$inilastPassR = Get-ADUser -Filter * | Select-Object -ExpandProperty SamAccountName | Sort-Object | ForEach-Object {(Get-ADUser -Identity $_ -Properties PasswordLastSet | Select-Object -ExpandProperty PasswordLastSet).Second}
+$iniCount = (get-aduser -filter * | Measure-Object).Count
+$iniLastLogon = (Get-ADUser -filter * -Properties lastlogon | Select-Object -ExpandProperty lastlogon | ForEach-Object {([datetime]$_).ToString()})
 $index = 0
 
 while ($true) {
@@ -25,6 +25,12 @@ while ($true) {
     }
 
 	$index = 0
+    $count = (get-aduser -filter * | Measure-Object).Count
+	if($iniCount -ne $count){
+		Write-Host -ForegroundColor Red "`nTotal Users: $count"
+	}else{
+		Write-Host "`nTotal Users: $count"
+	}
     
     Start-Sleep -Seconds 10
 
