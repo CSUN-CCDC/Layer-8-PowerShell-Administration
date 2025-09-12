@@ -1,5 +1,3 @@
-# Will add colors to represent change (Work in progress)
-# Will remove date
 # MAKE YOU SET PASSWORDS FOR ALL USERS IN ORDER FOR THIS TO WORK PROPERLY
 
 $iniCount = (get-aduser -filter * | Measure-Object).Count
