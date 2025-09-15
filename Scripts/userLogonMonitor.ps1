@@ -1,8 +1,9 @@
 # Might combine into one or give options to do either or later
-# Still glitching
 
 $iniCount = (get-aduser -filter * | Measure-Object).Count
-$iniLastLogon = (Get-ADUser -filter * -Properties lastlogon | Select-Object -ExpandProperty lastlogon | ForEach-Object {([datetime]$_).ToString()})
+$iniLastLogon = Get-ADUser -Filter * | Select-Object -ExpandProperty SamAccountName | Sort-Object 
+| ForEach-Object {(Get-ADUser -Identity $_ -Properties lastlogon | Select-Object -ExpandProperty lastlogon)}
+| ForEach-Object {([datetime]$_).ToString()}
 $index = 0
 
 while ($true) {
