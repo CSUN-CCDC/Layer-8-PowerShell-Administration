@@ -234,6 +234,51 @@ function Set-ADAccountEmails {
 	Get-ADUser -Filter * -SearchBase "$result" | Select-Object -ExpandProperty SamAccountName | ForEach-Object { Set-ADUser -Credential $credential -Identity $_ -EMailAddress "$_@AnimeHealth.net" }
 }
 
+#8a
+# Figuring out regex
+function New-ADUsers{
+	Write-Host -ForegroundColor Yellow "Select text file"
+	
+	function Get-NewUsers {
+		$Script:getChild = @(Get-ChildItem -Filter "*.txt")
+		$Script:getChild
+	}
+	Get-NewUsers
+	
+	while($true){
+	$refr = Read-Host "Would you like to refresh list [Y/N]"
+	if($refr -eq 'y'){
+		Get-NewUsers
+		$refr = $null
+	}elseif($refr -eq 'n'){
+		break
+	}else{
+		Write-Host -ForegroundColor Red "Unknown input refreshing anyways"
+		Get-NewUsers
+	}
+	}
+	
+	$count1 = 1
+	$Script:getChild = $Script:getChild | Select-Object -ExpandProperty Name | ForEach-Object {
+		$cOb = "[$count1]$_"
+        $count1++
+		$cOb
+		}
+	
+	$Script:getChild
+	while($true){
+	[int]$chos = Read-Host "Choose a number"
+	if(($chos -le $($Script:getChild.Length)) -and ($chos -gt 0)){
+		$getFile = $($Script:getChild[$chos - 1])
+		break
+	}elseif(($chos -gt $($Script:getChild.Length)) -or ($chos -le 0)){
+		Write-Host -ForegroundColor Red "Index out of bounds try again"
+	}
+	}
+	
+	$getFile 
+}
+
 #100a
 function Enable-PSRemotingInDomain {
 	$location = (Get-Location).Path
