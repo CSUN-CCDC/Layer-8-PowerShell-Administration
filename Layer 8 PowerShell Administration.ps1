@@ -237,46 +237,38 @@ function Set-ADAccountEmails {
 #8a
 # Figuring out regex
 function New-ADUsers{
-	Write-Host -ForegroundColor Yellow "Select text file"
-	
-	function Get-NewUsers {
-		$Script:getChild = @(Get-ChildItem -Filter "*.txt")
-		$Script:getChild
-	}
-	Get-NewUsers
-	
-	while($true){
-	$refr = Read-Host "Would you like to refresh list [Y/N]"
-	if($refr -eq 'y'){
-		Get-NewUsers
-		$refr = $null
-	}elseif($refr -eq 'n'){
-		break
-	}else{
-		Write-Host -ForegroundColor Red "Unknown input refreshing anyways"
-		Get-NewUsers
-	}
-	}
-	
-	$count1 = 1
-	$Script:getChild = $Script:getChild | Select-Object -ExpandProperty Name | ForEach-Object {
-		$cOb = "[$count1]$_"
-        $count1++
-		$cOb
+#Email Address maybe?
+#need to implement logic for same name conflict
+#need to finish with new-aduser
+
+Write-Host -ForegroundColor Yellow "Looking for users.txt"
+if (!(Test-Path -Path "$PSScriptRoot\users.txt")) {
+		Write-Host -ForegroundColor Red "`nPlease insert users.txt"
+		Write-Host -ForegroundColor Yellow "`nScript will start automatically once the file is found within the script root"
+		while(!(Test-Path -Path "$PSScriptRoot\users.txt")){
 		}
-	
-	$Script:getChild
-	while($true){
-	[int]$chos = Read-Host "Choose a number"
-	if(($chos -le $($Script:getChild.Length)) -and ($chos -gt 0)){
-		$getFile = $($Script:getChild[$chos - 1])
-		break
-	}elseif(($chos -gt $($Script:getChild.Length)) -or ($chos -le 0)){
-		Write-Host -ForegroundColor Red "Index out of bounds try again"
-	}
 	}
 	
-	$getFile 
+	Write-Host -ForegroundColor Cyan "`nFound!"
+	$users = Get-Content users.txt
+	foreach($user in $users){
+		
+		$build = $user -Split " "
+		
+		if(!($build.Length -eq 2)){
+			Write-Host -ForegroundColor Red "Error occured with formatting. Please check your txt file"
+			return
+		}
+		
+		$fName = $build[0]
+		$lName = $build[1]
+		
+		$fInit = $fName[0]
+		
+		New-ADUser -ChangePasswordAtLogon $true -Credential $credential -DisplayName "$fName $lName"
+			
+	}
+	
 }
 
 #100a
