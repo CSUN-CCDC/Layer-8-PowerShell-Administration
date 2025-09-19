@@ -236,10 +236,13 @@ function Set-ADAccountEmails {
 
 #8a
 # Figuring out regex
-function New-ADUsers{
 #Email Address maybe?
 #need to implement logic for same name conflict
 #need to finish with new-aduser
+function New-ADUsers{
+Write-Host -ForegroundColor Yellow "Looking for users.txt"
+#temp
+$credential = Get-Credential
 
 Write-Host -ForegroundColor Yellow "Looking for users.txt"
 if (!(Test-Path -Path "$PSScriptRoot\users.txt")) {
@@ -248,6 +251,9 @@ if (!(Test-Path -Path "$PSScriptRoot\users.txt")) {
 		while(!(Test-Path -Path "$PSScriptRoot\users.txt")){
 		}
 	}
+	
+	$secureStr = ConvertTo-SecureString -AsPlainText 'LayerDank420$'
+	$domainName = Get-ADDomain | Select-Object -ExpandProperty DNSRoot
 	
 	Write-Host -ForegroundColor Cyan "`nFound!"
 	$users = Get-Content users.txt
@@ -265,8 +271,8 @@ if (!(Test-Path -Path "$PSScriptRoot\users.txt")) {
 		
 		$fInit = $fName[0]
 		
-		New-ADUser -ChangePasswordAtLogon $true -Credential $credential -DisplayName "$fName $lName"
-			
+		New-ADUser -Name "$fName $lName" -AccountPassword $secureStr -ChangePasswordAtLogon $true -Credential $credential -DisplayName "$fName $lName" -Enabled $true -GivenName "$fName" -Surname "$lName" -UserPrincipalName ("$fInit" + "$lName" + "01" + "@$domainName") -SamAccountName ("$fInit" + "$lName" + "01" + "@$domainName") 
+		Write-Host -ForegroundColor Cyan "Great!"
 	}
 	
 }
