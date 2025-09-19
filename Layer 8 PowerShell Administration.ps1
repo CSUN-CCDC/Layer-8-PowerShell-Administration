@@ -235,15 +235,11 @@ function Set-ADAccountEmails {
 }
 
 #8a
-# Figuring out regex
+#Figuring out regex
 #Email Address maybe?
 #need to implement logic for same name conflict
 #need to finish with new-aduser
 function New-ADUsers{
-Write-Host -ForegroundColor Yellow "Looking for users.txt"
-#temp
-$credential = Get-Credential
-
 Write-Host -ForegroundColor Yellow "Looking for users.txt"
 if (!(Test-Path -Path "$PSScriptRoot\users.txt")) {
 		Write-Host -ForegroundColor Red "`nPlease insert users.txt"
@@ -271,7 +267,7 @@ if (!(Test-Path -Path "$PSScriptRoot\users.txt")) {
 		
 		$fInit = $fName[0]
 		
-		New-ADUser -Name "$fName $lName" -AccountPassword $secureStr -ChangePasswordAtLogon $true -Credential $credential -DisplayName "$fName $lName" -Enabled $true -GivenName "$fName" -Surname "$lName" -UserPrincipalName ("$fInit" + "$lName" + "01" + "@$domainName") -SamAccountName ("$fInit" + "$lName" + "01" + "@$domainName") 
+		New-ADUser -Name "$fName $lName" -AccountPassword $secureStr -ChangePasswordAtLogon $true -Credential $credential -DisplayName "$fName $lName" -Enabled $true -GivenName "$fName" -Surname "$lName" -UserPrincipalName ("$fInit" + "$lName" + "01" + "@$domainName")
 		Write-Host -ForegroundColor Cyan "Great!"
 	}
 	
