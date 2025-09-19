@@ -534,6 +534,13 @@ while ($start -eq $true) {
 
 		}
 
+		8a {
+			
+			New-ADUsers
+			break
+		
+		}
+
 		#secret government password cracker
 		69 {
 
