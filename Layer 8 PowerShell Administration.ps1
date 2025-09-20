@@ -237,9 +237,12 @@ function Set-ADAccountEmails {
 #8a
 #Figuring out regex
 #Email Address maybe?
-#need to implement logic for same name conflict
-#need to finish with new-aduser
+#name logic not working need to fix og method
 function New-ADUsers{
+#temp
+$credential = Get-Credential
+
+
 Write-Host -ForegroundColor Yellow "Looking for users.txt"
 if (!(Test-Path -Path "$PSScriptRoot\users.txt")) {
 		Write-Host -ForegroundColor Red "`nPlease insert users.txt"
@@ -253,8 +256,16 @@ if (!(Test-Path -Path "$PSScriptRoot\users.txt")) {
 	
 	Write-Host -ForegroundColor Cyan "`nFound!"
 	$users = Get-Content users.txt
+	$dupChkS = $users[0]
+	$dupChkS = $dupChkS -split " "
+	$dupChkLN = $dupChkS[1]
+	$dupChkFI = $dupChkS[0]
+	$dupChkFI = $dupChkFI[0]
+	$dupChk = ("$dupChkFI" + "$dupChkLN")
+	$dupNum = 1
 	foreach($user in $users){
 		
+		$dupFlag = $false
 		$build = $user -Split " "
 		
 		if(!($build.Length -eq 2)){
@@ -264,11 +275,21 @@ if (!(Test-Path -Path "$PSScriptRoot\users.txt")) {
 		
 		$fName = $build[0]
 		$lName = $build[1]
-		
 		$fInit = $fName[0]
+		$dupUsr = ("$fInit" + "$lName")
 		
+		if($dupChk -eq $dupUsr){
+			$dupNum++
+			$dupFlag = $true
+		}
+		
+		if($dupFlag -eq $true){
+		New-ADUser -Name "$fName $lName" -AccountPassword $secureStr -ChangePasswordAtLogon $true -Credential $credential -DisplayName "$fName $lName" -Enabled $true -GivenName "$fName" -Surname "$lName" -UserPrincipalName ("$dupUsr" + "0$dupNum" + "@$domainName")
+		Write-Host -ForegroundColor Cyan "Great!"
+		}else{
 		New-ADUser -Name "$fName $lName" -AccountPassword $secureStr -ChangePasswordAtLogon $true -Credential $credential -DisplayName "$fName $lName" -Enabled $true -GivenName "$fName" -Surname "$lName" -UserPrincipalName ("$fInit" + "$lName" + "01" + "@$domainName")
 		Write-Host -ForegroundColor Cyan "Great!"
+	}
 	}
 	
 }
